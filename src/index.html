@@ -1,17 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<script type="text/javascript" src="/jamc/personalized/akio/externalcrm/js/integration.js"></script>
+<script type="text/javascript">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>CRM ALE Connect integration</title>
-</head>
+function associate() {
+	akio.integration.associateCustomer(
+		{
+			extCrmId:document.getElementById('customerId').value,
+			firstname:document.getElementById('firstname').value,
+			lastname:document.getElementById('lastname').value,
+			email:document.getElementById('email').value
+		},
+	['extCrmId']
+	);
+}
 
+function dissociate() {
+        akio.integration.dissociateCustomer(['extCrmId']);
+}
+
+function sendEmail() {
+	akio.integration.sendSpontaneousMail({
+                "extCrmId": document.getElementById('customerId').value,
+                "firstname": document.getElementById('firstname').value,
+                "lastname": document.getElementById('lastname').value,
+                "email": document.getElementById('email').value
+            }, ['extCrmId'], document.getElementById('email').value, {
+		htmlBody:"<strong>myContent</strong>", subject:"Test Subject", mailboxId:1});
+
+}
+
+function call() {
+	akio.integration.callCustomer({
+		"extCrmId": document.getElementById('customerId').value,
+		"firstname": document.getElementById('firstname').value,
+		"lastname": document.getElementById('lastname').value,
+		"email": document.getElementById('email').value
+	}, ['extCrmId'], document.getElementById('phoneNumber').value);
+
+}
+
+</script>
+<style>
+html, body {
+	width:100%;
+}
+label,input  {
+	float:left;
+	clear:both;
+}
+#actions {
+	clear:both;
+}
+</style>
 <body>
-  <main>
-    <h1>CRM ALE Connect integration</h1>
-  </main>
+	<h1>CRM</h1>
+	<form style="height:2000px" onsubmit="return false">
+		<label>Customer Id :</label>
+		<input type="text" id="customerId" value="12345678" />
+		<label>Firstname :</label>
+		<input type="text" id="firstname" value="John" />
+		<label>Lastname :</label>
+		<input type="text" id="lastname" value="Doe" />
+		<label>Email :</label>
+		<input type="text" id="email" value="john@doe.com" />
+		<label>Phone :</label>
+		<input type="text" id="phoneNumber" value="012345789" />
+		<div id="actions">
+			<button onclick="associate()">Associate</button>
+			<button onclick="dissociate()">Dissociate</button>
+			<button onclick="sendEmail()">Email</button>
+			<button onclick="call()">Call</button>
+		</div>
+	</form>
 </body>
-
 </html>
