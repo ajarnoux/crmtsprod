@@ -26,7 +26,7 @@ function sendEmail() {
                 "lastname": document.getElementById('lastname').value,
                 "email": document.getElementById('email').value
             }, ['extCrmId'], document.getElementById('email').value, {
-		htmlBody:"<strong>myContent</strong>", subject:"Test Subject", mailboxId:119});
+		htmlBody:"<strong>myContent</strong>", subject:"Test Subject", mailboxId:1});
 
 }
 
@@ -65,7 +65,7 @@ label,input  {
 		<label>Email :</label>
 		<input type="text" id="email" value="andre.jarnoux@al-enterprise.com" />
 		<label>Phone :</label>
-		<input type="text" id="phoneNumber" value="61003" />
+		<input type="text" id="phoneNumber" value="61002" />
 		<div id="actions">
 			<button onclick="associate()">Associate</button>
 			<button onclick="dissociate()">Dissociate</button>
